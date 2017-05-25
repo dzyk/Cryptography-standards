@@ -28,11 +28,10 @@ with open(filenamein, 'rb') as f:
 
 f.close()
 gost =gost2015(k)
-c = gost.encryption(message)
-print (c)
 
+d = gost.decryption(message)
 
-newFileBytes = c
+newFileBytes = d
 newFileByteArray = bytearray(newFileBytes)
 
 newFile = open(filenameout, "wb")
