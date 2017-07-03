@@ -1,0 +1,70 @@
+  1 from symmetric.gost import gost2015
+  2 import binascii
+  3 import sys
+  4     
+  5 if __name__ == "__main__":
+  6     key = sys.argv[1]
+  7     filenamein = sys.argv[2]
+  8     filenameout = sys.argv[3]
+  9 
+ 10 k = list(binascii.unhexlify(key))
+ 11 
+ 12 message = list()
+ 13    
+ 14 with open(filenamein, 'rb') as f:
+ 15    byte_s = f.read()
+ 16    message = list(byte_s)
+ 17 
+ 18 print (message)
+ 19 f.close()
+ 20 gost =gost2015(k)
+ 21 c = gost.encryption(message)
+ 22 print (c)
+ 23 
+ 24 
+ 25 newFileBytes = c
+ 26 newFileByteArray = bytearray(newFileBytes)
+ 27 
+ 28 newFile = open(filenameout, "wb")
+ 29 newFile.write(newFileByteArray)
+ 30 newFile.close()
+
+
+FF  1 from symmetric.gost import gost2015
+    2 import binascii
+    3 import sys
+    4 
+    5 if __name__ == "__main__":
+    6     key = sys.argv[1]
+
+
+
+
+    7     filenamein = sys.argv[2]
+    8     filenameout = sys.argv[3]
+    9 
+   10 k = list(binascii.unhexlify(key))
+   11 
+   12 message = list()
+   13 
+   14 with open(filenamein, 'rb') as f:
+CC 15    while 1:
+CC 16        byte_s = f.read(1)
+CC 17        if not byte_s:
+CC 18            break
+CC 19        byte = byte_s[0]
+CC 20        message.append(byte)
+   21 
+   22 f.close()
+CC 23 gost =gost2015(k)
+   24 
+   25 d = gost.decryption(message)
+   26 
+   27 newFileBytes = d
+   28 newFileByteArray = bytearray(newFileBytes)
+   29 
+   30 newFile = open(filenameout, "wb")
+   31 newFile.write(newFileByteArray)
+   32 newFile.close()
+WW 33 
+
